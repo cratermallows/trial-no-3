@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Special Question</title>
+<style>
+body {
+background-color: #ffcccc; /* Soft pink background _/
+font-family: Arial, sans-serif;
+text-align: center;
+}
+.question {
+font-size: 24px;
+font-weight: bold;
+margin-top: 20px;
+}
+.answer {
+margin-top: 10px;
+}
+button {
+padding: 10px 20px;
+font-size: 18px;
+border: none;
+border-radius: 5px;
+background-color: #4CAF50;
+color: #fff;
+cursor: pointer;
+}
+button:hover {
+background-color: #3e8e41;
+}
+/_ Slide transition styles _/
+.slide-container {
+position: relative;
+width: 100%;
+height: 100vh;
+}
+.slide {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: #ffcccc;
+transition: transform 0.5s ease-in-out;
+}
+.slide.active {
+transform: translateX(0);
+}
+.slide.inactive {
+transform: translateX(100%);
+}
+/_ Happy and sad face styles _/
+.happy-face {
+font-size: 36px;
+color: #008000; /_ Green _/
+}
+.sad-face {
+font-size: 36px;
+color: #FF0000; /_ Red */
+}
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="slide active">
+<div class="question">Can you be my girlfriend?</div>
+<div class="answer">
+<button id="yes-btn">Yes</button>
+<button id="no-btn">No</button>
+</div>
+</div>
+<div class="slide inactive">
+<div class="question">Yay!</div>
+</div>
+<div class="slide inactive">
+<div class="question">Answer these extra questions, please say yes!</div>
+<div class="answer">
+<div class="extra-questions">
+<p>1. Can I call you mommy?</p>
+<button class="yes-no-btn" data-question="1">Yes/No</button>
+<span class="response-1 happy-face"></span>
+<span class="response-1 sad-face"></span>
+<p>2. Can I have your social accounts? If it's okay</p>
+<button class="yes-no-btn" data-question="2">Yes/No</button>
+<span class="response-2 happy-face"></span>
+<span class="response-2 sad-face"></span>
+<p>3. Can you surprise me with ur gorgeous selfie everyday?</p>
+<button class="yes-no-btn" data-question="3">Yes/No</button>
+<span class="response-3 happy-face"></span>
+<span class="response-3 sad-face"></span>
+<p>4. Can we meet up soon as u become 18 years old?</p>
+<button class="yes-no-btn" data-question="4">Yes/No</button>
+<span class="response-4 happy-face"></span>
+<span class="response-4 sad-face"></span>
+<p>5. Do you love me?</p>
+<button class="yes-no-btn" data-question="5">Yes/No</button>
+<span class="response-5 happy-face"></span>
+<span class="response-5 sad-face"></span>
+<p>6. Will you marry me?</p>
+<button class="yes-no-btn" data-question="6">Yes/No</button>
+<span class="response-6 happy-face"></span>
+<span class="response-6 sad-face"></span>
+</div>
+<div class="final-message" style="display:none;">
+<p>Congratulations! We're engaged!</p>
+</div>
+</div>
+</div>
+</div>
+<script>
+document.getElementById("yes-btn").addEventListener("click", function() {
+document.querySelectorAll(".slide")[0].classList.remove("active");
+document.querySelectorAll(".slide")[0].classList.add("inactive");
+document.querySelectorAll(".slide")[1].classList.remove("inactive");
+document.querySelectorAll(".slide")[1].classList.add("active");
+setTimeout(function() {
+document.querySelectorAll(".slide")[1].classList.remove("active");
+document.querySelectorAll(".slide")[1].classList.add("inactive");
+document.querySelectorAll(".slide")[2].classList.remove("inactive");
+document.querySelectorAll(".slide")[2].classList.add("active");
+}, 1500);
+});
+document.querySelectorAll(".yes-no-btn").forEach(function(button) {
+button.addEventListener("click", function() {
+var questionNumber = button.getAttribute("data-question");
+var responseElement = document.querySelector(".response-" + questionNumber);
+if (confirm("Are you sure?")) {
+responseElement.innerHTML = ":)";
+responseElement.classList.add("happy-face");
+responseElement.classList.remove("sad-face");
+if (questionNumber === "6") {
+document.querySelector(".final-message").style.display = "block";
+}
+} else {
+responseElement.innerHTML = ":(";
+responseElement.classList.add("sad-face");
+responseElement.classList.remove("happy-face");
+}
+});
+});
+</script>
+</body>
+  </html>
